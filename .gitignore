@@ -60,6 +60,10 @@ Thumbs.db
 *.log
 logs/
 
+# --- Claude Code ---
+.claude/
+skills-lock.json
+
 # --- Misc ---
 *.bak
 *.tmp
