@@ -1,0 +1,43 @@
+# =============================================================================
+# Yêu cầu thư viện - Dự án Đánh giá Rủi ro Tín dụng
+# Nhóm 14 - Môn Học Máy
+# =============================================================================
+
+# --- Xử lý dữ liệu ---
+numpy>=1.24.0
+pandas>=2.0.0
+
+# --- Machine Learning ---
+scikit-learn>=1.3.0
+xgboost>=2.0.0
+lightgbm>=4.0.0
+
+# --- Xử lý mất cân bằng ---
+imbalanced-learn>=0.11.0
+
+# --- Trực quan hóa ---
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# --- Giải thích mô hình (Điểm cộng) ---
+shap>=0.42.0
+
+# --- Cấu hình ---
+pyyaml>=6.0
+
+# --- Lưu mô hình ---
+joblib>=1.3.0
+
+# --- Thống kê ---
+scipy>=1.11.0
+
+# --- Tối ưu siêu tham số nâng cao (Điểm cộng) ---
+optuna>=3.3.0
+
+# --- Kiểm thử ---
+pytest>=7.4.0
+
+# --- Jupyter Notebooks ---
+jupyter>=1.0.0
+notebook>=7.0.0
+ipykernel>=6.25.0

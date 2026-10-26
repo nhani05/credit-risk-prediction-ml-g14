@@ -1,0 +1,65 @@
+# =============================================================================
+# .gitignore - Dự án Machine Learning Python
+# =============================================================================
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# --- Virtual Environment ---
+venv/
+env/
+.env/
+.venv/
+
+# --- IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# --- Dữ liệu (file lớn) ---
+data/raw/*.csv
+data/raw/*.data
+data/raw/*.doc
+data/raw/*.zip
+data/processed/*.csv
+data/external/
+
+# --- Mô hình đã train ---
+models/*.joblib
+models/*.pkl
+models/*.h5
+
+# --- Báo cáo và hình ảnh tạo tự động ---
+reports/figures/*.png
+reports/figures/*.jpg
+reports/figures/*.svg
+reports/*.txt
+reports/*.csv
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Logs ---
+*.log
+logs/
+
+# --- Misc ---
+*.bak
+*.tmp

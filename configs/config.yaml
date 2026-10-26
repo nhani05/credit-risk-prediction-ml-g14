@@ -1,0 +1,121 @@
+# =============================================================================
+# CẤU HÌNH DỰ ÁN ĐÁNH GIÁ RỦI RO TÍN DỤNG
+# Nhóm 14 - Môn Học Máy
+# =============================================================================
+
+# --- Đường dẫn dữ liệu ---
+data:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  external_dir: "data/external"
+
+# --- Cấu hình dữ liệu ---
+datasets:
+  german_credit:
+    name: "German Credit Dataset"
+    source: "UCI Machine Learning Repository"
+    target_col: "target"
+    description: "1000 mẫu, 20 đặc trưng, phân loại rủi ro tín dụng tốt/xấu"
+
+  give_me_credit:
+    name: "Give Me Some Credit"
+    source: "Kaggle Competition"
+    target_col: "SeriousDlqin2yrs"
+    description: "150000 mẫu, 10 đặc trưng tài chính, dự đoán khó khăn tài chính"
+
+# --- Tiền xử lý ---
+preprocessing:
+  missing_strategy: "median"           # mean, median, most_frequent
+  outlier_method: "iqr"                # iqr, zscore
+  outlier_factor: 1.5                  # Hệ số IQR hoặc ngưỡng Z-score
+  encoding_method: "label"             # label, onehot, auto
+  scaling_method: "standard"           # standard, minmax
+  imbalance_method: "smote"            # smote, undersample, combined, null
+  drop_missing_threshold: 0.5          # Loại bỏ cột thiếu > 50%
+
+# --- Chia dữ liệu ---
+split:
+  test_size: 0.2
+  random_state: 42
+  stratify: true
+
+# --- Trích xuất đặc trưng ---
+feature_engineering:
+  create_new_features: true
+  feature_selection_method: "mutual_info"  # mutual_info, chi2, rfe
+  n_select_features: 15
+  use_pca: false
+  pca_variance: 0.95                      # Giữ 95% phương sai
+
+# --- Cross-Validation ---
+cross_validation:
+  n_folds: 5
+  scoring: "f1"
+  shuffle: true
+
+# --- Hyperparameter Tuning ---
+tuning:
+  method: "random"                        # grid, random
+  n_iter: 30                              # Số lần thử (RandomizedSearch)
+  scoring: "f1"
+  cv: 5
+
+# --- Siêu tham số các mô hình ---
+models:
+  logistic_regression:
+    C: 1.0
+    penalty: "l2"
+    max_iter: 1000
+
+  decision_tree:
+    max_depth: 10
+    min_samples_split: 5
+    min_samples_leaf: 2
+    criterion: "gini"
+
+  random_forest:
+    n_estimators: 200
+    max_depth: 15
+    min_samples_split: 5
+    min_samples_leaf: 2
+
+  gradient_boosting:
+    n_estimators: 200
+    learning_rate: 0.1
+    max_depth: 5
+    subsample: 0.9
+
+  xgboost:
+    n_estimators: 200
+    learning_rate: 0.1
+    max_depth: 5
+    subsample: 0.9
+    colsample_bytree: 0.9
+
+  lightgbm:
+    n_estimators: 200
+    learning_rate: 0.1
+    max_depth: 5
+    num_leaves: 31
+    subsample: 0.9
+
+  svm:
+    C: 1.0
+    kernel: "rbf"
+    gamma: "scale"
+
+  knn:
+    n_neighbors: 5
+    weights: "distance"
+    metric: "euclidean"
+
+# --- Đường dẫn đầu ra ---
+output:
+  models_dir: "models"
+  reports_dir: "reports"
+  figures_dir: "reports/figures"
+
+# --- Logging ---
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
