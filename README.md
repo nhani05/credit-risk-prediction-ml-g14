@@ -160,20 +160,38 @@ pytest -q
 
 Đây là codebase học tập ban đầu, cần được rà soát và kiểm thử trong môi trường của nhóm trước khi dùng làm kết quả nộp. Các bộ dữ liệu công khai có thể đã cũ, khác phân bố thực tế, có thiên lệch và không đại diện cho quy trình cấp tín dụng hiện hành. Mô hình dự đoán không thay thế thẩm định chuyên môn hay đánh giá tác động công bằng.
 
-## Phân công công việc (nhóm 3 thành viên)
+## Phân công công việc (nhóm 3 thành viên, hoàn thành trong 5 tuần)
 
-> Thay “Thành viên 1/2/3” bằng tên thành viên thực tế. Các phần được chia theo trách nhiệm chính; cả nhóm cùng thống nhất quy trình, review mã nguồn và chuẩn bị báo cáo/thuyết trình.
+> Thay “Thành viên 1/2/3” bằng tên thực tế. Đây là phân công theo giai đoạn và trách nhiệm chính, không phải chia cứng theo tầng. Mỗi người đều tham gia ít nhất một phần của pipeline trên cả hai bộ dữ liệu và phải hiểu luồng từ dữ liệu đến đánh giá.
 
-| Thành viên | Phạm vi phụ trách | Công việc và đầu ra cụ thể |
-|---|---|---|
-| **Thành viên 1 — Dữ liệu & EDA** | Nguồn dữ liệu, kiểm tra dữ liệu, khám phá dữ liệu và tiền xử lý | Tìm hiểu điều khoản và tải tối thiểu hai bộ dữ liệu; ghi nguồn, mô tả biến, nhãn và giới hạn dữ liệu. Kiểm tra kiểu dữ liệu, giá trị thiếu, ngoại lai, trùng lặp, phân bố nhãn và tương quan. Phụ trách `src/data/`, notebook `01_EDA.ipynb` và phần EDA trong báo cáo. Bàn giao dữ liệu đã kiểm tra cùng các quyết định tiền xử lý có giải thích. |
-| **Thành viên 2 — Đặc trưng & mô hình** | Feature engineering, baseline, huấn luyện và tinh chỉnh | Thiết kế đặc trưng mới phù hợp với từng bộ dữ liệu; xây dựng baseline Logistic Regression/Decision Tree và các mô hình so sánh như Random Forest, Gradient Boosting, SVM hoặc KNN. Thử nghiệm lựa chọn đặc trưng, cross-validation và tuning trong phạm vi thời gian cho phép. Phụ trách `src/features/`, `src/models/` và notebook `02_Modeling.ipynb`. Bàn giao cấu hình/tham số, mô hình đã chọn và cách tái lập thí nghiệm. |
-| **Thành viên 3 — Đánh giá, giải thích & tích hợp** | Thiết kế đánh giá, phân tích lỗi, trực quan hóa và tổng hợp kết quả | Chốt metric phù hợp với mất cân bằng lớp; đánh giá trên test set giữ nguyên phân bố, lập bảng so sánh và confusion matrix. Phân tích False Positive/False Negative, ROC/PR, bias–variance và giới hạn; thử SHAP như nội dung mở rộng nếu khả thi. Phụ trách `src/evaluation/`, `src/visualization/`, notebook `03_Evaluation.ipynb` và tích hợp pipeline/báo cáo kết quả. Bàn giao biểu đồ, bảng số liệu, phân tích lỗi và kết luận có căn cứ. |
+| Thời gian | Thành viên 1 | Thành viên 2 | Thành viên 3 |
+|---|---|---|---|
+| **Tuần 1 — Dữ liệu và khung pipeline** | EDA, kiểm tra chất lượng, nhãn và giới hạn của German Credit; đề xuất tiền xử lý. | EDA, kiểm tra chất lượng, nhãn và giới hạn của Give Me Some Credit; đề xuất tiền xử lý. | Dựng/thống nhất giao diện pipeline và cấu hình dùng chung; tích hợp thử trên cả hai bộ, bổ sung test kiểm tra chia train/test và chống leakage. |
+| **Tuần 2 — Tiền xử lý và baseline** | Hoàn thiện tiền xử lý German Credit; chạy baseline dự đoán lớp đa số và Logistic Regression trên cả hai bộ. | Hoàn thiện tiền xử lý Give Me Some Credit; chạy Decision Tree, KNN và SVM trên cả hai bộ. | Đóng gói tiền xử lý theo pipeline, kiểm tra leakage; chạy Random Forest/Gradient Boosting phù hợp với dependency hiện có trên cả hai bộ. |
+| **Tuần 3 — So sánh và chốt mô hình** | Kiểm tra, giải thích kết quả baseline; phân tích ban đầu FP/FN và các vấn đề dữ liệu. | Chạy ensemble/boosting đã thống nhất, lưu cấu hình và kết quả có thể tái lập. | Thiết kế cross-validation và tuning chỉ trên train; tổng hợp bảng so sánh. Cả nhóm cùng chọn mô hình/quy trình trước khi mở test để đánh giá cuối. |
+| **Tuần 4 — Đánh giá và viết báo cáo** | Phân tích lỗi, confusion matrix, ROC/PR và fairness phù hợp với dữ liệu; viết phần dữ liệu, EDA và giới hạn. | Đánh giá calibration, thử cost-sensitive learning; giải thích chi phí FP/FN và viết phần phương pháp/mô hình. | Thực hiện SHAP cho mô hình đã chọn, tạo bảng/biểu đồ đánh giá và viết phần kết quả. SHAP không được diễn giải như bằng chứng nhân quả hay công bằng. |
+| **Tuần 5 — Hoàn thiện, in và trình bày** | Review chéo kết quả và kết luận; kiểm tra khớp giữa nội dung báo cáo với thí nghiệm đã chạy. | Tổng biên tập bản in: định dạng, mục lục, đánh số hình/bảng, in thử và phối hợp in/đóng bìa. Bắt đầu quy trình in trước hạn nộp ít nhất 3–4 ngày. | Tích hợp báo cáo, rà soát tính tái lập và hoàn thiện phụ lục kỹ thuật; cả nhóm cùng xác nhận nội dung cuối và chuẩn bị thuyết trình. |
 
-### Phần việc chung và phối hợp
+### Nguyên tắc phối hợp và cân bằng khối lượng
 
-1. Cả nhóm thống nhất câu hỏi nghiên cứu, cách diễn giải nhãn, quy tắc chia dữ liệu và metric trước khi so sánh mô hình.
-2. Mỗi thành viên làm việc trên nhánh riêng, ghi lại thay đổi và mở pull request để ít nhất một thành viên khác review.
-3. Không commit dữ liệu gốc, thông tin xác thực Kaggle hoặc mô hình sinh ra; chỉ commit mã nguồn, cấu hình, notebook và tài liệu cần thiết.
-4. Mỗi thành viên rà soát phần mình phụ trách; thành viên 3 phối hợp kiểm tra kết quả đầu-cuối, nhưng toàn nhóm cùng chịu trách nhiệm về tính đúng đắn và nội dung báo cáo.
-5. Trước khi nộp, cả nhóm kiểm tra notebook chạy được theo hướng dẫn README, thống nhất phiên bản kết quả, ghi rõ hạn chế và chuẩn bị phần trình bày.
+1. **Đầu ra rõ ràng:** mỗi đầu việc phải có kết quả bàn giao (mã/notebook, test, bảng số liệu, đoạn báo cáo hoặc checklist). Thành viên 3 không mặc định gánh toàn bộ tích hợp: tuần 5, thành viên 1 review kết quả, thành viên 2 chịu trách nhiệm bản in, thành viên 3 tích hợp kỹ thuật; cả nhóm cùng xác nhận.
+2. **Theo dõi thời gian:** họp ngắn đầu tuần để chốt đầu việc và ước tính giờ; cuối tuần ghi nhận giờ thực tế, việc tồn và điều chỉnh. Nếu một người đang vượt đáng kể phần còn lại, chuyển việc tương đương ngay trong tuần kế tiếp, không cộng thêm việc mở rộng.
+3. **Review chéo luân phiên:** Thành viên 1 review Thành viên 2; Thành viên 2 review Thành viên 3; Thành viên 3 review Thành viên 1. Review qua pull request, tập trung vào khả năng chạy lại, tính đúng đắn và chống leakage.
+4. **Học toàn bộ pipeline:** cuối mỗi tuần, người phụ trách trình bày phần đã làm và cách nối với các bước còn lại. Trong tuần 5, cả ba cùng chạy lại ít nhất một pipeline hoàn chỉnh trên mỗi bộ dữ liệu và mỗi người giải thích được: chia dữ liệu → tiền xử lý → huấn luyện → chọn mô hình → đánh giá.
+5. **Chống leakage:** chia train/test trước khi fit; imputer, encoder, scaler, chọn đặc trưng, ngưỡng và resampling chỉ fit trên train hoặc fold train. Giữ nguyên test cho đánh giá cuối; không dùng test để tuning hay chọn mô hình.
+6. **Giới hạn phạm vi:** không gộp hai bộ dữ liệu. Các phần mở rộng ngoài kế hoạch (ví dụ SHAP nâng cao hoặc mô hình mới) chỉ làm sau khi các đầu ra cốt lõi hoàn tất và phải thay thế một việc tương đương, không làm tăng khối lượng hay ảnh hưởng hạn nộp.
+7. Không commit dữ liệu, credentials hoặc mô hình sinh ra. Trước khi nộp, chạy các kiểm tra phù hợp, xác nhận hướng dẫn README và ghi rõ kiểm tra nào chưa chạy được cùng lý do.
+
+### Nhịp làm việc trong 5 tuần
+
+- **Mỗi tuần:** một buổi thống nhất kế hoạch và một buổi review tiến độ/đầu ra; xử lý vướng mắc sớm để không dồn việc sang tuần cuối.
+- **Cuối tuần 2:** xác nhận hai bộ dữ liệu đều chạy được qua tiền xử lý và baseline.
+- **Cuối tuần 3:** chốt mô hình và cấu hình mà không dựa vào test set.
+- **Tuần 4:** hoàn tất kết quả và phần lớn bản thảo; dành tuần 5 cho rà soát, định dạng, in và thuyết trình, không mở thêm thí nghiệm lớn.
+- **Tuần 5:** bàn giao nội dung cho in trước hạn nộp 3–4 ngày để có thời gian in thử và sửa lỗi.
+
+**Phạm vi báo cáo:** ưu tiên hoàn thành pipeline tái lập, baseline, so sánh mô hình, metric phù hợp, confusion matrix và phân tích lỗi cho từng bộ dữ liệu. Calibration, cost-sensitive learning, fairness và SHAP là các nội dung mở rộng có phạm vi giới hạn; nếu thiếu thời gian, nhóm cần nêu rõ phần nào đã thực hiện và phần nào chưa, không trình bày như kết quả đã có.
+
+#### Lưu ý
+
+Các kết quả của German Credit và Give Me Some Credit phải được báo cáo riêng vì khác định nghĩa nhãn, đặc trưng và quần thể. Không diễn giải mức điểm giữa hai bộ như phép so sánh trực tiếp cùng một bài toán.
